@@ -208,7 +208,7 @@ write_job_mac <- function(file = file.path(getwd(),"job.sh"),
                       CD = "/user/scratchkyukon/gent/gvo000/gvo00074/felicien/ED2/ED/run",
                       ed_exec = "/user/scratchkyukon/gent/gvo000/gvo00074/felicien/ED2/ED/run/ed_2.1-opt",
                       ED2IN = "ED2IN",
-                      if_plot = TRUE,
+                      if_post = TRUE,if_plot = TRUE,
                       Rplot_function = '/Users/quan/Models/R/read_and_plot_ED2_Q2R_tspft.r',
                       clean = FALSE,
                       in.line = ''){
@@ -234,7 +234,7 @@ write_job_mac <- function(file = file.path(getwd(),"job.sh"),
 
   write(in.line,file=file,append=TRUE)
 
-  if (if_plot) {
+  if (if_post) {
     r_script <- sub("\\.sh$", ".R", file)
     
     ## 1️⃣ 先写固定模板
@@ -248,29 +248,31 @@ write_job_mac <- function(file = file.path(getwd(),"job.sh"),
     
     ## 2️⃣ 保留你的“灵活接口”
     
-    write(
-      paste0(
-        'read_and_save_ED2.2', "('",
-        DN, "','",
-        analy, "','",
-        init, "','",
-        end, "')"
-      ),
-      file = r_script,
-      append = TRUE
-    )
-
-    # write(
-    #   paste0(
-    #     'read_and_plot_ED2_Q2R', "('",
-    #     DN, "','",
-    #     analy, "','",
-    #     init, "','",
-    #     end, "')"
-    #   ),
-    #   file = r_script,
-    #   append = TRUE
-    # )
+    if  (if_plot) {
+      write(
+        paste0(
+          'read_and_plot_ED2_Q2R', "('",
+          DN, "','",
+          analy, "','",
+          init, "','",
+          end, "')"
+        ),
+        file = r_script,
+        append = TRUE
+      )
+    } else {
+      write(
+        paste0(
+          'read_and_save_ED2.2', "('",
+          DN, "','",
+          analy, "','",
+          init, "','",
+          end, "')"
+        ),
+        file = r_script,
+        append = TRUE
+      )
+    }
     
     ## 4️⃣ 写 shell 调用
     write(
@@ -297,7 +299,7 @@ write_bash_submission_mac <- function (file = file.path(getwd(), "all_jobs.sh"),
       write("START_TIME=$(date +%s)", file = file, append = TRUE)
       write("", file = file, append = TRUE)
       bash_functions <- c("# 定义并行控制函数", "limit_jobs() {", 
-          "    while [ $(jobs -r | wc -l) -ge $1 ]; do", "        sleep 1", 
+          "    while [ $(jobs -r | wc -l) -ge $1 ]; do", "        sleep 10", 
           "    done", "}", paste0("MAX_JOBS=", max_parallel))
       write(bash_functions, file = file, append = TRUE)
       write("", file = file, append = TRUE)

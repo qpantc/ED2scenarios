@@ -624,11 +624,11 @@ $ED_NL
    !  SOILDEPTH_DB     -- If ISOILDEPTHFLG=1, this variable specifies the full path of the !
    !                      file that contains soil moisture and temperature information.    !
    !---------------------------------------------------------------------------------------!
-   NL%VEG_DATABASE = '/Users/quan/Models/DATA/ED_common_data/veg_oge/OGE2_'
-   NL%SOIL_DATABASE = '/Users/quan/Models/DATA/ED_common_data/soils/FAO/FAO_'
+   NL%VEG_DATABASE = '/Volumes/Sd1TB/MODEL_DRIVER/ED2/ED_common_data/veg_oge/OGE2_'
+   NL%SOIL_DATABASE = '/Volumes/Sd1TB/MODEL_DRIVER/ED2/ED_common_data/soils/FAO/FAO_'
    NL%LU_DATABASE = ''
    NL%PLANTATION_FILE = ''
-   NL%THSUMS_DATABASE = '/Users/quan/Models/DATA/ED_common_data/ed_inputs/'
+   NL%THSUMS_DATABASE = '/Volumes/Sd1TB/MODEL_DRIVER/ED2/ED_common_data/ed_inputs/'
    NL%ED_MET_DRIVER_DB = '/Users/tiacc/ED2/DATA/FLX_GF-Guy2004_2020/ED_MET_DRIVER_HEADER'
    NL%SOILSTATE_DB = ''
    NL%SOILDEPTH_DB = ''
